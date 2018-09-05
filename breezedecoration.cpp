@@ -108,11 +108,16 @@ namespace SierraBreeze
     QColor Decoration::titleBarColor() const
     {
 
+
         auto c = client().data();
+
 
         if ( isKonsoleWindow(c) ) {
             return m_KonsoleTitleBarColor;
         }
+
+	if(true)
+	   return m_ETitleBarColor;
 
         if( hideTitleBar() ) return c->color( ColorGroup::Inactive, ColorRole::TitleBar );
         else if( m_animation->state() == QPropertyAnimation::Running )
@@ -121,7 +126,8 @@ namespace SierraBreeze
                 c->color( ColorGroup::Inactive, ColorRole::TitleBar ),
                 c->color( ColorGroup::Active, ColorRole::TitleBar ),
                 m_opacity );
-        } else return c->color( c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::TitleBar );
+        //} else return c->color( c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::TitleBar );
+        } else return m_ETitleBarColor;
 
     }
 
@@ -341,6 +347,10 @@ namespace SierraBreeze
         m_KonsoleTitleBarColor.setRed(backgroundRGB[0].toInt());
         m_KonsoleTitleBarColor.setGreen(backgroundRGB[1].toInt());
         m_KonsoleTitleBarColor.setBlue(backgroundRGB[2].toInt());
+
+	m_ETitleBarColor.setRed(61);
+	m_ETitleBarColor.setGreen(61);
+	m_ETitleBarColor.setBlue(61);
 
         m_KonsoleTitleBarColor.setAlpha(configColor.group("General").readEntry("Opacity").toFloat() * 255);
 
